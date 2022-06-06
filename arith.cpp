@@ -8,6 +8,19 @@ using namespace std;
 	map<char, pair<double,double> > m; 
 	map<char,double> sym_freq;
 	
+void makeNarrow(double low, double high)
+{
+	double range = high - low;
+	
+  			for (map<char, pair<double,double> >::iterator itr = m.begin(); itr != m.end(); ++itr)
+	{
+		
+		itr->second.first = low;
+		itr->second.second = sym_freq[itr->first] * range+low;
+		low = itr->second.second;
+ 	
+	 }
+}
 
 
 
@@ -59,7 +72,58 @@ for (map<char, pair<double,double> >::iterator itr = m.begin(); itr != m.end(); 
 	}
 	
 	
-		
+			//encoding
+			
+	
+	low = 0.0;
+
+for (int i=0;i<in.length();i++)
+	{
+	
+	double range = high - low;
+  high = low + range * m[in[i]].second;
+  low = low + range * m[in[i]].first; 
+			//cout<<low<<" "<<high<<endl;
+
+}
+ g << low + (high-low)/2;
+
+
+f.close();
+g.close();
+
+
+
+  //decoding
+ifstream F("encode.txt", ios::out | ios::binary);
+ofstream G("decode.txt", ios::out | ios::binary);
+double message;
+F>>message;
+
+	high = 1.0;
+	low = 0.0;
+  
+  while(count) {
+  
+  
+  for (map<char, pair<double,double> >::iterator itr = m.begin(); itr != m.end(); ++itr)
+	{
+  	pair<double,double> p = itr->second;
+	
+		if(message>p.first && message<p.second) {
+			  
+					G<<itr->first;
+  					makeNarrow(p.first,p.second);
+  					break;
+  		
+		  }
+ 
+	}
+	
+	
+	count--;
+	
+}
   
  
 	return 0;
