@@ -78,27 +78,7 @@ char byte = f.get();
 while (!f.eof())
 	{
 		
-			if(byte=='|')		{  //остался хвост
-			
-			int k;
-			k = f.get()-48;
-			byte = f.get();
-		
-		
-	for(int i = 0; i<k ; i++){
-		
-			bool b = byte & (1 << (7 - i));
-			v.push_back(b);
-			
-		}
-		
-		break;
-		}
-		
-		
-		
-		
-		bool b = byte & (1 << (7 - count));
+	bool b = byte & (1 << (7 - count));
 		v.push_back(b);
 		
 			count++;

@@ -127,7 +127,7 @@ count = 0;
 			count++;
 			if (count == 8) { count = 0;   g << buf; buf = 0; }
 		}
-		if(buf) g<<"|"<<count<<buf;
+		if(buf) g<<buf;
 
 g.close();
 
